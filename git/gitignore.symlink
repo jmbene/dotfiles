@@ -1,0 +1,9 @@
+.DS_Store
+*~
+*.swp
+.gitattributes
+build
+.idea
+.gitconfig
+.pixeltest
+pixeltest_failures.html

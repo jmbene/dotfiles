@@ -1,0 +1,70 @@
+# Local/private config goes in the include
+[include]
+    path = ~/.gitconfig.local
+[hub]
+    protocol = https
+[alias]
+    co = checkout
+    promote = !$ZSH/bin/git-promote
+    wtf     = !$ZSH/bin/git-wtf
+    rank-contributors = !$ZSH/bin/git-rank-contributors
+    count   = !git shortlog -sn
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+[core]
+	excludesfile = /Users/jmbene/.gitignore
+    editor = vim
+[apply]
+    whitespace = nowarn
+[fetch]
+    prune = true
+[merge]
+	tool = Kaleidoscope
+[mergetool]
+    prompt = false
+    keepBackups = false
+[mergetool "mergepbx"]
+    cmd = mergepbx "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" \"$REMOTE\"
+#driver for merging Xcode project files
+[merge "mergepbx"]
+    name = Xcode project files merger
+    driver = mergepbx %O %A %B
+[difftool]
+    prompt = false
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[help]
+    autocorrect = 1
+[push]
+        # See `git help config` (search for push.default)
+        # for more information on different options of the below setting.
+        #
+        # Setting to git 2.0 default to suppress warning message
+    default = simple
+[filter "lfs"]
+    required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[credential]
+    helper = osxkeychain
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true
+	template = /Users/jmbene/.stCommitMsg
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/jmbene/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Jose Miguel Benedicto Ruiz
+	email = 22660192+jmbene@users.noreply.github.com
+	signingkey = 73A266E15CAE459F976DB80D5982C784822C7FEA
